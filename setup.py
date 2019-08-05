@@ -15,5 +15,5 @@ setup(
     include_dirs=[numpy.get_include()],
     packages=find_namespace_packages(where="src"),
     zip_safe=False,
-    install_requires=["numpy>=1.16",]
+    install_requires=["numpy>=1.16", "cython>=0.29"]
 )

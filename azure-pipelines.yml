@@ -6,36 +6,42 @@
 trigger:
 - master
 
+jobs:
+- job: 'Linux'
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.6'
+  - script: |
+      pip install numpy cython pytest
+      pip install -e .
+      pytest
+    displayName: 'Ubuntu Tests'
 
-strategy:
-  matrix:
-    linux:
-      imageName: 'ubuntu-16.04'
-    mac:
-      imageName: 'macos-10.13'
-    windows:
-      imageName: 'vs2017-win2016'
-    Python27:
-      python.version: '2.7'
-    Python36:
-      python.version: '3.6'
+- job: 'Win'
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.6'
+  - script: |
+      pip install numpy cython pytest
+      pip install -e .
+      pytest
+    displayName: 'Win Tests'
 
-pool:
-  vmImage: $(imageName)
-
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
-
-- script: |
-    python -m pip install --upgrade pip
-    pip install numpy
-  displayName: 'Install dependencies'
-
-- script: |
-    pip install .
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+- job: 'OSX'
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.6'
+  - script: |
+      pip install numpy cython pytest
+      pip install -e .
+      pytest
+    displayName: 'OSX Tests'
