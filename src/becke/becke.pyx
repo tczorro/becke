@@ -1,3 +1,9 @@
+# Copyright (c) 2019, Derrick Yang
+# All rights reserved.
+# 
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree.
+
 """Cython extension forb becke weights."""
 
 from libc.math cimport sqrt

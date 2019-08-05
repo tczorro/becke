@@ -5,6 +5,11 @@ import numpy
 
 setup(
     name="becke",
+    version='0.1.0',
+    description='Fast and memory efficient implimentation of becke weights.',
+    auther='Derrick Yang',
+    author_email='yxt1991@gmail.com',
+    url='https://github.com/tczorro/becke.git',
     package_dir={"": "src"},
     ext_modules=cythonize("src/becke/*.pyx"),
     include_dirs=[numpy.get_include()],
