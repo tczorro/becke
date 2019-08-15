@@ -1,7 +1,7 @@
 """Becke tests files."""
 from unittest import TestCase
 
-from becke.becke import compute_becke_weights, compute_select_becke
+from becke import compute_becke_weights, compute_select_becke
 
 import numpy as np
 from numpy.testing import assert_allclose
