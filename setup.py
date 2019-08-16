@@ -5,7 +5,7 @@ import numpy
 
 setup(
     name="becke",
-    version='0.0.2',
+    version='0.0.5',
     description='Fast and memory efficient implementation of becke weights.',
     auther='Derrick Yang',
     author_email='yxt1991@gmail.com',

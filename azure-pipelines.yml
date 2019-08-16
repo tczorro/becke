@@ -14,11 +14,23 @@ jobs:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.6'
+      addToPath: true
   - script: |
       pip install numpy cython pytest
       pip install -e .
       pytest
     displayName: 'Ubuntu Tests'
+  # Build the python distribution from source
+  - script: |
+      pip install wheel twine
+      python setup.py sdist
+  # Release
+  - task: TwineAuthenticate@1
+    inputs:
+      pythonUploadServiceConnection: pypi
+  - script: |
+      python -m twine upload -r mypypi --config-file $(PYPIRC_PATH) dist/*
+    displayName: 'Ubuntu Release'
 
 - job: 'Win'
   pool:
@@ -32,6 +44,17 @@ jobs:
       pip install -e .
       pytest
     displayName: 'Win Tests'
+  # Build the python distribution from source
+  - script: |
+      pip install wheel twine
+      python setup.py bdist_wheel
+  # Release
+  - task: TwineAuthenticate@1
+    inputs:
+      pythonUploadServiceConnection: pypi
+  - script: |
+      python -m twine upload -r mypypi --config-file $(PYPIRC_PATH) dist/*.whl
+    displayName: 'Win Release'
 
 - job: 'OSX'
   pool:
@@ -45,3 +68,14 @@ jobs:
       pip install -e .
       pytest
     displayName: 'OSX Tests'
+  - script: |
+      pip install wheel twine
+      python setup.py bdist_wheel
+  # Release
+  - task: TwineAuthenticate@1
+    inputs:
+      pythonUploadServiceConnection: pypi
+  - script: |
+      python -m twine upload -r mypypi --config-file $(PYPIRC_PATH) dist/*.whl
+    displayName: 'OSX Release'
+
