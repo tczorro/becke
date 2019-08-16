@@ -25,7 +25,7 @@ cpdef double[:] compute_select_becke(double[:, :] points,
                                      int order):
     cdef int i, j, k, l, m, n
     cdef double nom, denom, p
-    cdef double u_ab, s
+    cdef double u_ab, s, miu, nu
     m = atoms.shape[0]  # number of atoms
     n = points.shape[0]   # number of points
     cdef double[:, :] alpha = np.zeros((m, m), dtype=float)
