@@ -5,7 +5,7 @@ import numpy
 
 setup(
     name="becke",
-    version='0.0.5',
+    version='0.0.10',
     description='Fast and memory efficient implementation of becke weights.',
     auther='Derrick Yang',
     author_email='yxt1991@gmail.com',
@@ -16,7 +16,7 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     classifiers=[
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
     install_requires=["numpy>=1.16", "cython>=0.29"]
