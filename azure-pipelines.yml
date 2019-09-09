@@ -10,10 +10,15 @@ jobs:
 - job: 'Linux'
   pool:
     vmImage: 'ubuntu-16.04'
+  strategy:
+    matrix:
+      Python36:
+        python.version: '3.6'
+
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.6'
+      versionSpec: '$(python.version)'
       addToPath: true
   - script: |
       pip install numpy cython pytest
@@ -35,10 +40,20 @@ jobs:
 - job: 'Win'
   pool:
     vmImage: 'vs2017-win2016'
+  strategy:
+    matrix:
+      Python27:
+        python.version: '2.7'
+      Python36:
+        python.version: '3.6'
+      Python37:
+        python.version: '3.7'
+
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.6'
+      versionSpec: '$(python.version)'
+      addToPath: true
   - script: |
       pip install numpy cython pytest
       pip install -e .
@@ -59,10 +74,20 @@ jobs:
 - job: 'OSX'
   pool:
     vmImage: 'macOS-10.13'
+  strategy:
+    matrix:
+      Python27:
+        python.version: '2.7'
+      Python36:
+        python.version: '3.6'
+      Python37:
+        python.version: '3.7'
+
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.6'
+      versionSpec: '$(python.version)'
+      addToPath: true
   - script: |
       pip install numpy cython pytest
       pip install -e .
@@ -78,4 +103,3 @@ jobs:
   - script: |
       python -m twine upload -r mypypi --config-file $(PYPIRC_PATH) dist/*.whl
     displayName: 'OSX Release'
-
