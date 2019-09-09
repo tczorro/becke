@@ -1,11 +1,14 @@
 #!/usr/bin/env python
-from setuptools import find_packages, setup
+from setuptools import find_packages, setup, dist
+
+dist.Distribution().fetch_build_eggs(['Cython>=0.29', 'numpy>=1.16'])
+
 from Cython.Build import cythonize
 import numpy
 
 setup(
     name="becke",
-    version='0.0.10',
+    version='0.0.11',
     description='Fast and memory efficient implementation of becke weights.',
     auther='Derrick Yang',
     author_email='yxt1991@gmail.com',
