@@ -8,13 +8,13 @@ import numpy
 
 setup(
     name="becke",
-    version='0.0.12',
+    version='0.0.13',
     description='Fast and memory efficient implementation of becke weights.',
     auther='Derrick Yang',
     author_email='yxt1991@gmail.com',
     url='https://github.com/tczorro/becke.git',
     package_dir={"": "src"},
-    ext_modules=cythonize("src/becke/*.pyx"),
+    ext_modules=cythonize(["src/becke/*.pyx"]),
     include_dirs=[numpy.get_include()],
     packages=find_packages(),
     zip_safe=False,
